@@ -3,7 +3,7 @@ from twitter_user import TwitterUser
 from time import sleep
 
 class Twitter:
-    def __init__(self, link) -> None:
+    def __init__(self, link: str) -> None:
         self.twitter_user = TwitterUser(link)   
 
 
