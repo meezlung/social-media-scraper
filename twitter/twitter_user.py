@@ -1,3 +1,5 @@
+# type: ignore
+
 import os
 
 from selenium import webdriver
@@ -36,7 +38,6 @@ class TwitterUser:
         self.twitter_url: str = link  
         self.driver.get(self.twitter_url)
 
-        self.array = list()
         self.objects: dict[str, str] = {}
 
         self.image_download_index: int = 0
@@ -76,7 +77,7 @@ class TwitterUser:
         password.send_keys(self.PASSWORD)
 
     def press_big_login_button(self) -> None:
-        xpath = "//div[@data-testid='LoginForm_Login_Button']"
+        xpath = "//button[@data-testid='LoginForm_Login_Button']"
         big_login_button = self.driver.find_element(By.XPATH, xpath)
         big_login_button.click()
 
@@ -230,18 +231,18 @@ class TwitterUser:
 
                 # Name, Username
                 try:
-                    name = tweet.find_element(By.CSS_SELECTOR, "[data-testid='User-Name'] div[class='css-1rynq56 r-bcqeeo r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-b88u0q r-1awozwy r-6koalj r-1udh08x r-3s2u2q'][style='text-overflow: unset; color: rgb(231, 233, 234);'] span[class='css-1qaijid r-bcqeeo r-qvutc0 r-poiln3']").text
-                    username = tweet.find_element(By.CSS_SELECTOR, "[data-testid='User-Name'] div[class='css-1rynq56 r-dnmrzs r-1udh08x r-3s2u2q r-bcqeeo r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-16dba41 r-18u37iz r-1wvb978'][style='text-overflow: unset; color: rgb(113, 118, 123);'] span[class='css-1qaijid r-bcqeeo r-qvutc0 r-poiln3']").text
+                    name = tweet.find_element(By.CSS_SELECTOR, "[data-testid='User-Name'] div[class='css-146c3p1 r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-b88u0q r-1awozwy r-6koalj r-1udh08x r-3s2u2q'][style='text-overflow: unset; color: rgb(231, 233, 234);'] span[class='css-1jxf684 r-dnmrzs r-1udh08x r-3s2u2q r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3']").text
+                    username = tweet.find_element(By.CSS_SELECTOR, "[data-testid='User-Name'] div[class='css-146c3p1 r-dnmrzs r-1udh08x r-3s2u2q r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-16dba41 r-18u37iz r-1wvb978'][style='text-overflow: unset; color: rgb(113, 118, 123);'] span[class='css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3']").text
                 except:
-                    emoji_name = tweet.find_element(By.CSS_SELECTOR, "[data-testid='User-Name'] div[class='css-1rynq56 r-bcqeeo r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-b88u0q r-1awozwy r-6koalj r-1udh08x r-3s2u2q'][style='text-overflow: unset; color: rgb(231, 233, 234);'] span[class='css-1qaijid r-dnmrzs r-1udh08x r-3s2u2q r-bcqeeo r-qvutc0 r-poiln3'] img[class='r-4qtqp9 r-dflpy8 r-zw8f10 r-sjv1od r-10akycc r-h9hxbl']")
+                    emoji_name = tweet.find_element(By.CSS_SELECTOR, "[data-testid='User-Name'] div[class='css-146c3p1 r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-b88u0q r-1awozwy r-6koalj r-1udh08x r-3s2u2q'][style='text-overflow: unset; color: rgb(231, 233, 234);'] span[class='css-1jxf684 r-dnmrzs r-1udh08x r-3s2u2q r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3'] img[class='r-4qtqp9 r-dflpy8 r-zw8f10 r-sjv1od r-10akycc r-h9hxbl']")
                     name = emoji_name.get_attribute('src')
 
                     if name is None:
                         name = f'name_placeholder{name_counter}'
                         name_counter += 1
                         
-                    username = tweet.find_element(By.CSS_SELECTOR, "[data-testid='User-Name'] div[class='css-1rynq56 r-dnmrzs r-1udh08x r-3s2u2q r-bcqeeo r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-16dba41 r-18u37iz r-1wvb978'][style='text-overflow: unset; color: rgb(113, 118, 123);'] span[class='css-1qaijid r-bcqeeo r-qvutc0 r-poiln3']").text
-                
+                    username = tweet.find_element(By.CSS_SELECTOR, "[data-testid='User-Name'] div[class='css-146c3p1 r-dnmrzs r-1udh08x r-3s2u2q r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-16dba41 r-18u37iz r-1wvb978'][style='text-overflow: unset; color: rgb(113, 118, 123);'] span[class='css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3']").text
+
                 print(name, username)
 
                 sleep(1)
